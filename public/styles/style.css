@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+header {
+    margin: 16px 0 10px 60px;
+    position: relative;
+}
+
+header h1 {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+nav #menuBtn {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    cursor: pointer;
+}
+
+main #days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+main #date {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+
+
+footer {
+
+    background-color: blueviolet;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    grid-template-areas:
+    "a"
+    "b";
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    height: 8%;
+}
+
+footer #addBtn {
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: blue;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer #addBtn i {
+    font-weight: 300;
+}
+
+footer #copy {
+    grid-area: b;
+    align-self: end;
+    justify-self: end;
+    margin-right: 2%;
+    margin-bottom: 2%;
+    font-size: 10px;
+}
