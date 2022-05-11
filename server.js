@@ -1,6 +1,9 @@
 import express from 'express';
 import ejs from 'ejs';
 
+import eventController from "./controller/eventController.js";
+import eventModel from "./model/eventModel.js";
+
 // "app" environment
 // -------------------------
 const app = express();
@@ -12,7 +15,7 @@ const port = 3000;
 // set template engine to ejs
 // -------------------------
 app.set('view engine', 'ejs');
-
+app.use(express.urlencoded({ extended: true }));
 
 // middleware (use param next...)
 // -------------------------
@@ -23,10 +26,11 @@ app.set('view engine', 'ejs');
 
 // route request
 // -------------------------
-app.get('/', (req, res) => {
-    res.render('mainPage');
-});
+// app.get('/', (req, res) => {
+//     res.render('mainPage');
+// });
 
+app.get('/', eventController.getAllEvents);
 // serve static files
 // -------------------------
 app.use(express.static('public'));
@@ -42,11 +46,11 @@ app.get('*', (req, res, next) => {
 
 // server error 500...
 // -------------------------
-app.use((err, req, res, next) => {
+// app.use((err, req, res, next) => {
 
-    // show response
-    return res.status(500).send("Server error, please return later");
-});
+//     // show response
+//     return res.status(500).send("Server error, please return later");
+// });
 
 // start server
 app.listen(port, () => {

@@ -13,6 +13,10 @@
     <%- include ('partials/nav.ejs') %>
 <main>
 
+    <div id="week">
+        <p>Week</p>
+        <p id="weekNumber"></p>
+    </div>
     <div id="days">
     <p>M</p>
     <p>T</p>
@@ -23,7 +27,13 @@
     <p>S</p>
     </div>
     <div id="date">
-        
+
+    </div>
+
+    <div>
+        <% events.forEach(function(event) { %>
+            <p><%= event.dateTime %>: <%= event.title %></p>
+            <% }); %>
     </div>
 
 </main>
