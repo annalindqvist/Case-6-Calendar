@@ -13,10 +13,18 @@
     <%- include ('partials/nav.ejs') %>
 <main>
 
-    <div id="week">
-        <p>Week</p>
-        <p id="weekNumber"></p>
+    <div id="monthWeek">
+        <div id="month">
+
+        </div>
+        <div id="week">
+            <p>Week</p>
+            <p id="weekNumber"></p>
+            <span id="previousWeek"><i class="fa fa-angle-left"></i></span>
+            <span id="nextWeek"><i class="fa fa-angle-right"></i></span>
+        </div>
     </div>
+   
     <div id="days">
     <p>M</p>
     <p>T</p>
@@ -38,5 +46,7 @@
 
 </main>
 <%- include ('partials/footer.ejs') %>
+
+<script src="./js/main.js"></script>
 </body>
 </html>

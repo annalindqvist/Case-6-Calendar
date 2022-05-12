@@ -9,7 +9,7 @@ export default {
 
         // const view = eventViews.allEvents(allEvents);
 
-        console.log("hej");
+        //console.log("hej");
 
         res.render("mainPage", { events: eventModel.getEvents() });
     }

@@ -7,14 +7,25 @@
     font-family: 'Poppins', sans-serif;
 }
 
+body {
+    background-color: #FCFCFC;
+}
+
 header {
     margin: 16px 0 10px 60px;
     position: relative;
 }
 
 header h1 {
+    color: #FD97B7;
     font-size: 18px;
     font-weight: 500;
+}
+
+header p {
+    color: #FFDEE7;
+    font-size: 14px;
+    font-weight: 300;
 }
 
 nav #menuBtn {
@@ -24,12 +35,38 @@ nav #menuBtn {
     cursor: pointer;
 }
 
+main {
+    margin: 30px 16px 0 16px;
+
+}
+
+main #monthWeek {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+main #month {
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+main #week span{
+    margin: 10px;
+}
+
 main #days {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: 1fr;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
+    font-size: 14px;
+
+    margin: 10px 0 5px 0;
     
 }
 
@@ -45,7 +82,7 @@ main #date {
 
 footer {
 
-    background-color: blueviolet;
+    background-color: #FFE8D0;
 
     display: grid;
     grid-template-columns: 1fr;
@@ -65,7 +102,7 @@ footer #addBtn {
     position: fixed;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: blue;
+    background-color: #FE9D70;
     border-radius: 50%;
     width: 45px;
     height: 45px;
@@ -76,13 +113,15 @@ footer #addBtn {
 
 footer #addBtn i {
     font-weight: 300;
+    color: #FFE8D0;
 }
 
 footer #copy {
+    color: #FEC4AC;
     grid-area: b;
     align-self: end;
     justify-self: end;
     margin-right: 2%;
     margin-bottom: 2%;
-    font-size: 10px;
+    font-size: 12px;
 }
