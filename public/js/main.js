@@ -7,48 +7,28 @@ const previousWeek = document.getElementById("previousWeek");
 const nextWeek = document.getElementById("nextWeek");
 
 let current = new Date();
+let pressToChangeWeek = 0;
 
 let datesOnWeek = [];
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 let month = months[current.getMonth()];
 
-//console.log("currentDay", current.getDay());
-//console.log("currentDate", current.getDate());
-
-
-// function getWeekDays() {
-
-//     for (let i = 0 ; i < 7 ; i++) {
-
-//         let firstWeekDay = current.getDate() - current.getDay() + i;
-//         let date = new Date(current.setDate(firstWeekDay + 1)).toString().slice(8, 10);
-
-//         datesOnWeek.push(date);
-
-//         // Skriver ut rätt månad
-//         monthDiv.innerText = month;
-//         dateDiv.innerHTML += `<p> ${datesOnWeek[i]}</p>`;
-//     }
-// }
-
 function getWeekDays(chosenDate = new Date()) {
+
+    datesOnWeek = [];
+    dateDiv.innerHTML = "";
 
     for (let i = 0; i < 7; i++) {
 
         let firstWeekDay = chosenDate.getDate() - chosenDate.getDay() + i;
-
         let date = new Date(chosenDate.setDate(firstWeekDay + 1)).toString().slice(8, 10);
 
         datesOnWeek.push(date);
 
-        // Skriver ut rätt månad 
         monthDiv.innerText = month;
         dateDiv.innerHTML += `<p> ${datesOnWeek[i]}</p>`;
-
-        console.log(datesOnWeek)
     }
-
-}
+} 
 
 getWeekDays();
 
@@ -67,50 +47,28 @@ function getWeek() {
 
 getWeek();
 
-
 previousWeek.onclick = function () {
-    console.log("previousWeek onclick");
 
-    // Previous week ---------
+    pressToChangeWeek = pressToChangeWeek - 7;
+
     let currentWeek = Number(weekTag.innerText);
-    //console.log(currentWeek);
     let previousWeekNumber = Math.max(currentWeek - 1, 1);
-    //console.log(previousWeekNumber);
-
     weekTag.innerText = previousWeekNumber;
 
-    //----------------
-    // previous weeks dates
-    // for each innertext in p tag siffran - 7...
-
     const d = new Date();
-    d.setDate(d.getDate() - 7)
+    d.setDate(d.getDate() + pressToChangeWeek)
     getWeekDays(d);
-
-    // lägger till förra veckans datum i arrayen men går alltid om från början när man klickar på pilen..
-    // datesOnWeek.forEach(date => {
-    //     console.log("date", date + 1);
-
-    //     datesOnWeek.push(Number(date - 7));
-
-    //  });
-
-
-    // for (i = 0 ; i < datesOnWeek.length; i++){
-    //      console.log(datesOnWeek);
-
-    // }
-    // console.log(datesOnWeek);
-
 }
 
 nextWeek.onclick = function () {
-    console.log("next onclick");
+
+    pressToChangeWeek = pressToChangeWeek + 7;
 
     let currentWeek = Number(weekTag.innerText);
-    console.log(currentWeek);
     let nextWeekNumber = Math.min(currentWeek + 1, 52);
-    console.log(nextWeekNumber);
-
     weekTag.innerText = nextWeekNumber;
+
+    const d = new Date();
+    d.setDate(d.getDate() + pressToChangeWeek)
+    getWeekDays(d);
 }
