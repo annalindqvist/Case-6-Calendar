@@ -38,7 +38,7 @@ export default {
             return;
         }
 
-        const eventToBeRemoved = eventModel.getEvents(id);
+        const eventToBeRemoved = eventModel.getEvent(id);
         const isOK = eventModel.removeEvent(eventToBeRemoved.id);
 
         if (!isOK) {

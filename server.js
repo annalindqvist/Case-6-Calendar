@@ -34,6 +34,8 @@ app.use(express.json());
 app.get('/', eventController.getAllEvents);
 app.get('/mainPage', eventController.getAllEvents);
 app.post('/mainPage', eventController.createEvent);
+
+app.delete('/mainPage/:id', eventController.removeEvent);
 // serve static files
 // -------------------------
 app.use(express.static('public'));

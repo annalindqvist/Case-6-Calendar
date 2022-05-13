@@ -75,8 +75,11 @@ nextWeek.onclick = function () {
     getWeekDays(d);
 }
 
-const removeBtn = document.getElementById("removeEvent");
+async function removeEvent(id) {
+    console.log("removeEvent was called with id", id);
+    const response = await fetch(`/mainPage/${id}`, { method: "delete" });
 
-removeBtn.onclick = function() {
-    console.log(removeBtn.id);
-}
+    if (response.redirected) {
+      window.location.href = response.url; // '/'
+    }
+  }

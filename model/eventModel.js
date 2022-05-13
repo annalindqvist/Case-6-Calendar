@@ -7,6 +7,9 @@ const eventModel = {
     getEvents: function () {
         return JSON.parse(fs.readFileSync(dbPath, "utf-8"));
     },
+    getEvent: function (id) {
+        return this.getEvents().find((event) => event.id === id);
+      },
     saveEvents: function (events) {
         return fs.writeFileSync(dbPath, JSON.stringify(events));
     },
@@ -40,7 +43,7 @@ const eventModel = {
 
         const filteredEvents = allEvents.filter((event) => event.id !== id);
     
-        this.saveQuotes(filteredEvents);
+        this.saveEvents(filteredEvents);
     
         return true;
       }
