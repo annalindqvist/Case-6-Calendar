@@ -78,6 +78,12 @@ main #date {
     grid-row-gap: 0px;
 }
 
+div #formPopUp form{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: repeat(3, 1fr);
+}
+
 
 
 footer {

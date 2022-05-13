@@ -16,6 +16,7 @@ const port = 3000;
 // -------------------------
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // middleware (use param next...)
 // -------------------------
@@ -31,6 +32,8 @@ app.use(express.urlencoded({ extended: true }));
 // });
 
 app.get('/', eventController.getAllEvents);
+app.get('/mainPage', eventController.getAllEvents);
+app.post('/mainPage', eventController.createEvent);
 // serve static files
 // -------------------------
 app.use(express.static('public'));

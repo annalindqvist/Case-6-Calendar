@@ -25,9 +25,11 @@ function getWeekDays(chosenDate = new Date()) {
 
         datesOnWeek.push(date);
 
-        monthDiv.innerText = month;
         dateDiv.innerHTML += `<p> ${datesOnWeek[i]}</p>`;
     }
+    month = months[chosenDate.getMonth()];
+    monthDiv.innerText = month;
+    
 } 
 
 getWeekDays();
@@ -71,4 +73,10 @@ nextWeek.onclick = function () {
     const d = new Date();
     d.setDate(d.getDate() + pressToChangeWeek)
     getWeekDays(d);
+}
+
+const removeBtn = document.getElementById("removeEvent");
+
+removeBtn.onclick = function() {
+    console.log(removeBtn.id);
 }
