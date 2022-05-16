@@ -40,30 +40,39 @@
 
         </div>
 
-        <div>
-            <% events.forEach(function(event) { %>
-            <p><%= event.date %>: <%= event.title %> : <%= event.time %> <i class="fa fa-times" onclick="removeEvent(<%=event.id%>)"></i></p>
-            <% }); %>
+        <div id="eventListContainer">
+            <div id="eventList">
+
+                <% events.forEach(function(event) { %>
+                <div class="eventListDiv">
+                    <p id="eventTime"><%= event.time %></p>
+                    <p id="eventTitle"><%= event.title %></p>
+                    <p id="eventDate"><%= event.date %></p>
+                    <div><i class="fa fa-times removeEvent" onclick="removeEvent(<%=event.id%>)"></i></div>
+                    <div><i class="fa fa-pencil editEvent" data-id="<%= event.id %>"></i></div>
+                </div>
+                <% }); %>
+            </div>
         </div>
 
         <div id="formPopUp">
             <h2>Add to calendar</h2>
             <form action="/mainPage" autocomplete="off" method="post">
                 <div>
-                <label for="date">Date</label>
-                <input type="date" id="date" name="date" value="2022-01-01" min="2022-01-01" max="2022-12-31">
-            </div>
-            <div>
-                <label for="time">Time</label>
-                <input type="text" name="time" id="time">
-            </div>
-            <div>
-                <label for="title">Title</i></label>
-                <textarea name="title" id="title" cols="30" rows="3"></textarea>
-            </div>
-            <div>
-                <button type="submit"><i class="fa fa-plus"></i></button>
-            </div>
+                    <label for="date">Date</label>
+                    <input type="date" id="date" name="date" value="2022-05-16" min="2022-01-01" max="2022-12-31">
+                </div>
+                <div>
+                    <label for="time">Time</label>
+                    <input type="text" name="time" id="time">
+                </div>
+                <div>
+                    <label for="title">Title</i></label>
+                    <textarea name="title" id="title" cols="30" rows="3"></textarea>
+                </div>
+                <div>
+                    <button type="submit"><i class="fa fa-plus"></i></button>
+                </div>
             </form>
         </div>
 

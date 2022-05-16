@@ -7,6 +7,10 @@ const eventModel = {
     getEvents: function () {
         return JSON.parse(fs.readFileSync(dbPath, "utf-8"));
     },
+    thisWeeksEvents: function (date){
+        console.log("TEST", date);
+        return this.getEvents().find((event) => event.date === date);
+    },
     getEvent: function (id) {
         return this.getEvents().find((event) => event.id === id);
       },
@@ -44,6 +48,27 @@ const eventModel = {
         const filteredEvents = allEvents.filter((event) => event.id !== id);
     
         this.saveEvents(filteredEvents);
+    
+        return true;
+    },
+    updateEvent: function (id, newDate, newTime, newTitle) {
+        const allEvents = this.getEvents();
+    
+        if (!allEvents) {
+          return false;
+        }
+
+        const idx = allEvents.findIndex((event) => event.id === id);
+    
+        if (idx < 0) {
+          return false;
+        }
+    
+        allEvents[idx].date = newDate;
+        allEvents[idx].time = newTime;
+        allEvents[idx].title = newTitle;
+    
+        this.saveEvents(allEvents);
     
         return true;
       }

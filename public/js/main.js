@@ -25,12 +25,20 @@ function getWeekDays(chosenDate = new Date()) {
 
         datesOnWeek.push(date);
 
+        console.log("chosenDate", chosenDate);
+        console.log("date", date);
+        console.log("firstWeekDate", firstWeekDay);
+
+
         dateDiv.innerHTML += `<p> ${datesOnWeek[i]}</p>`;
     }
     month = months[chosenDate.getMonth()];
     monthDiv.innerText = month;
-    
-} 
+
+
+    return chosenDate;
+
+}
 
 getWeekDays();
 
@@ -77,9 +85,61 @@ nextWeek.onclick = function () {
 
 async function removeEvent(id) {
     console.log("removeEvent was called with id", id);
-    const response = await fetch(`/mainPage/${id}`, { method: "delete" });
+    const response = await fetch(`/mainPage/${id}`, {
+        method: "delete"
+    });
 
     if (response.redirected) {
-      window.location.href = response.url; // '/'
+        window.location.href = response.url; // '/'
     }
-  }
+}
+
+async function editEvent(e) {
+    const id = Number(e.target.dataset.id); // data-id -> dataset.id
+    //const container = evt.target.parentElement;
+    const eventDate = document.getElementById("eventDate");
+    const eventTime = document.getElementById("eventTime");
+    const eventTitle = document.getElementById("eventTitle");
+    console.log(e);
+
+    // if not editable make them editable
+    //!eventDate.isContentEditable &&
+    if (!eventTime.isContentEditable && !eventTitle.isContentEditable) {
+        //eventDate.contentEditable = true;
+        eventTime.contentEditable = true;
+        eventTitle.contentEditable = true;
+
+        // clicking the same button should save the changes
+        e.target.innerHTML = '<i class="fa fa-check"></i>';
+    } else {
+        // Second time clicked it should save changes
+
+        // reset element to be non editable
+        //eventDate.contentEditable = false;
+        eventTime.contentEditable = false;
+        eventTitle.contentEditable = false;
+        e.target.innerHTML = '<i class="fa fa-pencil"></i>';
+
+        // Look at values of authorEl and quoteEl and submit new quote
+        const newEvent = {
+            time: eventTime.innerText,
+            title: eventTitle.innerText,
+        };
+        const response = await fetch(`/mainPage/${id}`, {
+            method: "put",
+            body: JSON.stringify(newEvent),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+
+        // Check if there is a redirect to follow the new url
+        if (response.redirected) {
+            window.location.href = response.url;
+        }
+    }
+}
+
+document
+    .querySelectorAll(".editEvent")
+    .forEach((btn) => (btn.onclick = editEvent));

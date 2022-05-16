@@ -35,7 +35,12 @@ app.get('/', eventController.getAllEvents);
 app.get('/mainPage', eventController.getAllEvents);
 app.post('/mainPage', eventController.createEvent);
 
+app.get('/mainPage/:date', eventController.thisWeeksEvents);
+
+
 app.delete('/mainPage/:id', eventController.removeEvent);
+app.put('/mainPage/:id', eventController.updateEvent);
+
 // serve static files
 // -------------------------
 app.use(express.static('public'));
