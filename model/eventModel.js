@@ -8,8 +8,8 @@ const eventModel = {
         return JSON.parse(fs.readFileSync(dbPath, "utf-8"));
     },
     thisWeeksEvents: function (date){
-        console.log("TEST", date);
-        return this.getEvents().find((event) => event.date === date);
+        console.log("eventmodel, TEST date : ", date);
+        return this.getEvents().filter((event) => event.date === date);
     },
     getEvent: function (id) {
         return this.getEvents().find((event) => event.id === id);

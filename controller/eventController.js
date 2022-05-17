@@ -18,14 +18,14 @@ export default {
     thisWeeksEvents: function(req, res) {
 
         const date = req.params.date;
-        console.log("date", date)
+        console.log("eventController, date: ", date)
 
         if (!date) {
             console.log("something went wrong");
             return;
         }
         console.log("händer detta")
-        console.log(typeof eventModel.thisWeeksEvents(date));
+        console.log(eventModel.thisWeeksEvents(date));
         res.render("mainPage", { events: eventModel.thisWeeksEvents(date) });
 
     },
@@ -83,6 +83,7 @@ export default {
         }
 
         const isOK = eventModel.updateEvent(id, date, time, title);
+        console.log(date, time, title, id)
 
         if (!isOK) {
             console.log("Event not Updated");

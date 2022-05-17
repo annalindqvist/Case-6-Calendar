@@ -25,16 +25,21 @@ function getWeekDays(chosenDate = new Date()) {
 
         datesOnWeek.push(date);
 
-        console.log("chosenDate", chosenDate);
-        console.log("date", date);
-        console.log("firstWeekDate", firstWeekDay);
+        // console.log("chosenDate", chosenDate.toISOString());
+        // console.log("date", date);
+        //console.log("firstWeekDate", date);
 
 
         dateDiv.innerHTML += `<p> ${datesOnWeek[i]}</p>`;
     }
     month = months[chosenDate.getMonth()];
     monthDiv.innerText = month;
-
+    
+    //console.log("test ", chosenDate.getDate() - 6);
+    // console.log("test 2 ", chosenDate.toISOString())
+    
+    thisWeeksEvent(chosenDate.toISOString());
+    
 
     return chosenDate;
 
@@ -94,6 +99,23 @@ async function removeEvent(id) {
     }
 }
 
+
+
+async function thisWeeksEvent(date) {
+    console.log("thisWeeksEvent was called with: ", date);
+    //date.slice(0, 10)
+    const response = await fetch(`/mainPage/${date.slice(0, 10)}`, {
+        method: "get"
+    });
+    console.log("response", response)
+
+    if (response.redirected) {
+        window.location.href = response.url; // '/'
+    }
+}
+
+
+
 async function editEvent(e) {
     const id = Number(e.target.dataset.id); // data-id -> dataset.id
     //const container = evt.target.parentElement;
@@ -143,3 +165,23 @@ async function editEvent(e) {
 document
     .querySelectorAll(".editEvent")
     .forEach((btn) => (btn.onclick = editEvent));
+
+
+
+const openFormBtn = document.getElementById("openForm");
+const submitBtn = document.getElementById("submitBtn");
+
+openFormBtn.onclick = function() {
+    document.getElementById("formPopUp").style.display = "block";
+    document.getElementById("eventListContainer").style.display = "none";
+}
+submitBtn.onclick = function() {
+    document.getElementById("formPopUp").style.display = "none";
+    document.getElementById("eventListContainer").style.display = "block";
+
+}
+
+
+
+
+

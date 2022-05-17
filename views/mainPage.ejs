@@ -22,7 +22,7 @@
             <div id="week">
                 <p>Week</p>
                 <p id="weekNumber"></p>
-                <span id="previousWeek"><i class="fa fa-angle-left"></i></span>
+                <a href="/"><span id="previousWeek"><i class="fa fa-angle-left"></i></span></a>
                 <span id="nextWeek"><i class="fa fa-angle-right"></i></span>
             </div>
         </div>
@@ -55,23 +55,27 @@
             </div>
         </div>
 
+        <div>
+            <button id="openForm"><i class="fa fa-plus"></i></button>
+        </div>
+
         <div id="formPopUp">
             <h2>Add to calendar</h2>
             <form action="/mainPage" autocomplete="off" method="post">
                 <div>
                     <label for="date">Date</label>
-                    <input type="date" id="date" name="date" value="2022-05-16" min="2022-01-01" max="2022-12-31">
+                    <input type="date" id="formDate" name="date" value="2022-05-16" min="2022-01-01" max="2022-12-31">
                 </div>
                 <div>
                     <label for="time">Time</label>
-                    <input type="text" name="time" id="time">
+                    <input type="text" name="time" id="time" rows="1" maxlength="15">
                 </div>
                 <div>
                     <label for="title">Title</i></label>
-                    <textarea name="title" id="title" cols="30" rows="3"></textarea>
+                    <textarea name="title" id="title" cols="30" rows="3" maxlength="100"></textarea>
                 </div>
                 <div>
-                    <button type="submit"><i class="fa fa-plus"></i></button>
+                    <button type="submit" id="submitBtn"><i class="fa fa-check"></i></button>
                 </div>
             </form>
         </div>
@@ -79,7 +83,7 @@
     </main>
     <%- include ('partials/footer.ejs') %>
 
-    <script src="./js/main.js"></script>
+    <script src="/js/main.js"></script>
 </body>
 
 </html>
