@@ -25,24 +25,14 @@ function getWeekDays(chosenDate = new Date()) {
 
         datesOnWeek.push(date);
 
-        // console.log("chosenDate", chosenDate.toISOString());
-        // console.log("date", date);
-        //console.log("firstWeekDate", date);
-
-
         dateDiv.innerHTML += `<p> ${datesOnWeek[i]}</p>`;
     }
     month = months[chosenDate.getMonth()];
     monthDiv.innerText = month;
-    
-    //console.log("test ", chosenDate.getDate() - 6);
-    // console.log("test 2 ", chosenDate.toISOString())
-    
+
     thisWeeksEvent(chosenDate.toISOString());
-    
 
     return chosenDate;
-
 }
 
 getWeekDays();
@@ -99,19 +89,74 @@ async function removeEvent(id) {
     }
 }
 
+function renderEvents(events) {
+
+    document.getElementById("eventList").innerHTML = "";
+
+    events.forEach(events => {
+
+        console.log(events.time, events.title, events.date);
+        const eventListDiv = document.createElement("div");
+        eventListDiv.classList = "eventListDiv";
+
+        const eventTime = document.createElement("p");
+        eventTime.classList = "eventTime";
+        eventTime.innerText = events.time;
+        console.log(eventTime);
+
+        const eventTitle = document.createElement("p");
+        eventTitle.classList = "eventTitle";
+        eventTitle.innerText = events.title;
+
+        const eventDate = document.createElement("p");
+        eventDate.classList = "eventDate";
+        eventDate.innerText = events.date;
+
+        const removeEventDiv = document.createElement("div");
+        const removeEventX = document.createElement("i");
+        removeEventX.classList = "fa fa-times removeEvent";
+        //removeEventX onclick="removeEvent(<%=event.id%>)"
+        removeEventDiv.appendChild(removeEventX);
+
+        const editEventDiv = document.createElement("div");
+        const editEventPen = document.createElement("i");
+        editEventPen.classList = "fa fa-pencil editEvent";
+        //editEventPen data-id="<%= event.id %>"
+        editEventDiv.appendChild(editEventPen);
+
+        eventListDiv.appendChild(eventTime);
+        eventListDiv.appendChild(eventTitle);
+        eventListDiv.appendChild(eventDate);
+        eventListDiv.appendChild(removeEventDiv);
+        eventListDiv.appendChild(editEventDiv);
+
+        console.log(eventListDiv)
+
+        const eventList = document.getElementById("eventList");
+        eventList.appendChild(eventListDiv);
+       
+    });
+
+}
 
 
 async function thisWeeksEvent(date) {
     console.log("thisWeeksEvent was called with: ", date);
     //date.slice(0, 10)
-    const response = await fetch(`/mainPage/${date.slice(0, 10)}`, {
+    // const response = await fetch(`/mainPage/${date.slice(0, 10)}`, {
+    //     method: "get"
+    // });
+    const response = await fetch(`/mainPage/${date}`, {
         method: "get"
     });
-    console.log("response", response)
+    const responseData = await response.json();
+    console.log("response", responseData)
 
-    if (response.redirected) {
-        window.location.href = response.url; // '/'
-    }
+
+    renderEvents(responseData.events)
+    // if (response.redirected) {
+    //     window.location.href = response.url; // '/'
+    // }
 }
 
 
@@ -132,6 +177,7 @@ async function editEvent(e) {
         eventTitle.contentEditable = true;
 
         // clicking the same button should save the changes
+
         e.target.innerHTML = '<i class="fa fa-check"></i>';
     } else {
         // Second time clicked it should save changes
@@ -140,6 +186,7 @@ async function editEvent(e) {
         //eventDate.contentEditable = false;
         eventTime.contentEditable = false;
         eventTitle.contentEditable = false;
+
         e.target.innerHTML = '<i class="fa fa-pencil"></i>';
 
         // Look at values of authorEl and quoteEl and submit new quote
@@ -171,17 +218,12 @@ document
 const openFormBtn = document.getElementById("openForm");
 const submitBtn = document.getElementById("submitBtn");
 
-openFormBtn.onclick = function() {
+openFormBtn.onclick = function () {
     document.getElementById("formPopUp").style.display = "block";
     document.getElementById("eventListContainer").style.display = "none";
 }
-submitBtn.onclick = function() {
+submitBtn.onclick = function () {
     document.getElementById("formPopUp").style.display = "none";
     document.getElementById("eventListContainer").style.display = "block";
 
 }
-
-
-
-
-

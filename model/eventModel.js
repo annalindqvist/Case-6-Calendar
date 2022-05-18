@@ -3,13 +3,43 @@ import ejs from "ejs";
 
 const dbPath = "./eventDB.json";
 
+function getFirstDateOfWeek(date) {
+
+    const lastDayOfWeek = new Date(date);
+    
+    lastDayOfWeek.setDate(lastDayOfWeek.getDate() - 6 );
+    const firstDateOfWeek = lastDayOfWeek.toLocaleDateString();
+
+    return firstDateOfWeek;
+}
+
+function getLastDateOfWeek (date) {
+    const lastDateOfWeek = new Date(date);
+    const sunday = lastDateOfWeek.toLocaleDateString();
+    //console.log("lastDayOfWeek", lastDayOfWeek);
+    console.log("lastDateOfWeek UNIX: ", sunday);
+    //return new Date(lastDateOfWeek).getTime() / 1000;
+    return sunday;
+}
+
+
+
 const eventModel = {
     getEvents: function () {
         return JSON.parse(fs.readFileSync(dbPath, "utf-8"));
     },
     thisWeeksEvents: function (date){
         console.log("eventmodel, TEST date : ", date);
-        return this.getEvents().filter((event) => event.date === date);
+        //const dateToUnix = new Date(date).getTime() / 1000;
+        const firstDateOfWeek = getFirstDateOfWeek(date);
+        const lastDateOfWeek = getLastDateOfWeek(date);
+
+        //console.log(firstDateOfWeek, lastDateOfWeek);
+
+        //return this.getEvents().filter((event) => event.date >= firstDateOfWeek && event.date <= lastDateOfWeek)
+        const newArray = this.getEvents().filter((event) => event.date >= firstDateOfWeek && event.date <= lastDateOfWeek)
+       return newArray;
+        //return this.getEvents().filter((event) => event.date === date);
     },
     getEvent: function (id) {
         return this.getEvents().find((event) => event.id === id);

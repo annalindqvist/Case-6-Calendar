@@ -47,6 +47,7 @@ main #monthWeek {
     grid-column-gap: 0px;
     grid-row-gap: 0px;
     margin: 16px 16px;
+    align-items: center;
 }
 
 main #month {
@@ -55,6 +56,13 @@ main #month {
     letter-spacing: 3px;
 }
 
+main #week {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr;
+    align-items: center;
+    text-transform: lowercase;
+}
 main #week span {
     margin: 10px;
 }

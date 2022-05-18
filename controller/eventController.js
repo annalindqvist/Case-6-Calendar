@@ -26,7 +26,7 @@ export default {
         }
         console.log("händer detta")
         console.log(eventModel.thisWeeksEvents(date));
-        res.render("mainPage", { events: eventModel.thisWeeksEvents(date) });
+        res.json( { events: eventModel.thisWeeksEvents(date) });
 
     },
     createEvent: (req, res) => {
