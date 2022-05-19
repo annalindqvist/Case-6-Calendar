@@ -83,7 +83,9 @@ async function removeEvent(id) {
     const response = await fetch(`/mainPage/${id}`, {
         method: "delete"
     });
-
+    //let event = document.querySelector('[data-id="id"]');
+    //console.log(event);
+    //id.parentElement.styles.display = "none";
     if (response.redirected) {
         window.location.href = response.url; // '/'
     }
@@ -93,35 +95,36 @@ function renderEvents(events) {
 
     document.getElementById("eventList").innerHTML = "";
 
-    events.forEach(events => {
+    events.forEach(event => {
 
-        console.log(events.time, events.title, events.date);
+        console.log(event.time, event.title, event.date);
         const eventListDiv = document.createElement("div");
         eventListDiv.classList = "eventListDiv";
 
         const eventTime = document.createElement("p");
         eventTime.classList = "eventTime";
-        eventTime.innerText = events.time;
+        eventTime.innerText = event.time;
         console.log(eventTime);
 
         const eventTitle = document.createElement("p");
         eventTitle.classList = "eventTitle";
-        eventTitle.innerText = events.title;
+        eventTitle.innerText = event.title;
 
         const eventDate = document.createElement("p");
         eventDate.classList = "eventDate";
-        eventDate.innerText = events.date;
+        eventDate.innerText = event.date;
 
         const removeEventDiv = document.createElement("div");
         const removeEventX = document.createElement("i");
         removeEventX.classList = "fa fa-times removeEvent";
-        //removeEventX onclick="removeEvent(<%=event.id%>)"
+        removeEventX.onclick= () =>removeEvent(event.id);
         removeEventDiv.appendChild(removeEventX);
 
         const editEventDiv = document.createElement("div");
         const editEventPen = document.createElement("i");
         editEventPen.classList = "fa fa-pencil editEvent";
-        //editEventPen data-id="<%= event.id %>"
+        editEventPen.setAttribute("data-id", event.id)
+        editEventPen.onclick= (e) => editEvent(e);
         editEventDiv.appendChild(editEventPen);
 
         eventListDiv.appendChild(eventTime);
@@ -136,38 +139,35 @@ function renderEvents(events) {
         eventList.appendChild(eventListDiv);
        
     });
-
 }
-
 
 async function thisWeeksEvent(date) {
     console.log("thisWeeksEvent was called with: ", date);
-    //date.slice(0, 10)
-    // const response = await fetch(`/mainPage/${date.slice(0, 10)}`, {
-    //     method: "get"
-    // });
+
     const response = await fetch(`/mainPage/${date}`, {
         method: "get"
     });
     const responseData = await response.json();
     console.log("response", responseData)
 
-
     renderEvents(responseData.events)
-    // if (response.redirected) {
-    //     window.location.href = response.url; // '/'
-    // }
 }
 
-
+//document.querySelectorAll(".editEvent").forEach((btn) => (btn.onclick = editEvent));
+//const editEvent = document.getElementsByClassName("editEvent");
 
 async function editEvent(e) {
-    const id = Number(e.target.dataset.id); // data-id -> dataset.id
-    //const container = evt.target.parentElement;
-    const eventDate = document.getElementById("eventDate");
-    const eventTime = document.getElementById("eventTime");
-    const eventTitle = document.getElementById("eventTitle");
-    console.log(e);
+    const id = Number(e.target.dataset.id); 
+    console.log(e.target.parentElement.parentElement);
+    const eventContainer = e.target.parentElement.parentElement;
+
+    //const eventDate = document.getElementsByClassName("eventDate");
+    const eventTime = eventContainer.children[0];
+    const eventTitle = eventContainer.children[1];
+    const eventDate = eventContainer.children[2];
+    console.log("eventDate", eventDate.innerText);
+
+    console.log(eventContainer.children[1])
 
     // if not editable make them editable
     //!eventDate.isContentEditable &&
@@ -176,23 +176,19 @@ async function editEvent(e) {
         eventTime.contentEditable = true;
         eventTitle.contentEditable = true;
 
-        // clicking the same button should save the changes
-
         e.target.innerHTML = '<i class="fa fa-check"></i>';
     } else {
         // Second time clicked it should save changes
 
-        // reset element to be non editable
-        //eventDate.contentEditable = false;
         eventTime.contentEditable = false;
         eventTitle.contentEditable = false;
 
         e.target.innerHTML = '<i class="fa fa-pencil"></i>';
 
-        // Look at values of authorEl and quoteEl and submit new quote
         const newEvent = {
             time: eventTime.innerText,
             title: eventTitle.innerText,
+            date: eventDate.innerText,
         };
         const response = await fetch(`/mainPage/${id}`, {
             method: "put",
@@ -209,10 +205,7 @@ async function editEvent(e) {
     }
 }
 
-document
-    .querySelectorAll(".editEvent")
-    .forEach((btn) => (btn.onclick = editEvent));
-
+//document.querySelectorAll(".editEvent").forEach((btn) => (btn.onclick = editEvent));
 
 
 const openFormBtn = document.getElementById("openForm");

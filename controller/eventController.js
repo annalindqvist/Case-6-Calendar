@@ -6,26 +6,17 @@ import ejs from "ejs";
 
 export default {
     getAllEvents: function (req, res) {
-        // const allEvents = eventModel.getEvents();
-        // const eventThisWeek = allEvents.filter(event => event.include(thisWeekEvents))
-        // console.log(eventThisWeek);
-        //const view = eventViews.allEvents(allEvents);
-
-        //console.log("hej");
-
         res.render("mainPage", { events: eventModel.getEvents() });
     },
     thisWeeksEvents: function(req, res) {
 
         const date = req.params.date;
-        console.log("eventController, date: ", date)
 
         if (!date) {
             console.log("something went wrong");
             return;
         }
-        console.log("händer detta")
-        console.log(eventModel.thisWeeksEvents(date));
+        
         res.json( { events: eventModel.thisWeeksEvents(date) });
 
     },
@@ -48,7 +39,7 @@ export default {
     },
     removeEvent: (req, res) => {
         const id = Number(req.params.id);
-
+        console.log(id);
         if (id < 0) {
             console.log(eventViews.errorInvalidId);
             return;
@@ -64,6 +55,8 @@ export default {
 
         console.log(eventViews.eventRemoved(eventToBeRemoved));
 
+        
+        //res.json( {message: "Event removed"});
         res.redirect('/');
     },
     updateEvent: (req, res) => {
@@ -92,7 +85,8 @@ export default {
 
         console.log("Event Updated");
 
-        res.redirect('/');
+        res.json( {message: "Event updated"});
+        //res.redirect('/');
     }
 
 }
