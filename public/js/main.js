@@ -84,13 +84,10 @@ nextWeek.onclick = function () {
 }
 
 async function removeEvent(id) {
-    console.log("removeEvent was called with id", id);
     const response = await fetch(`/mainPage/${id}`, {
         method: "delete"
     });
-    //let event = document.querySelector('[data-id="id"]');
-    //console.log(event);
-    //id.parentElement.styles.display = "none";
+   
     if (response.redirected) {
         window.location.href = response.url; // '/'
     }
@@ -100,16 +97,24 @@ function renderEvents(events) {
 
     document.getElementById("eventList").innerHTML = "";
 
+    const sortedEvents = events.sort( function (a, b) {
+        
+        const date1 = new Date(a.date);
+        const date2 = new Date(b.date)
+
+        return date1 - date2;
+    
+    });
+
+
     events.forEach(event => {
 
-        console.log(event.time, event.title, event.date);
         const eventListDiv = document.createElement("div");
         eventListDiv.classList = "eventListDiv";
 
         const eventTime = document.createElement("p");
         eventTime.classList = "eventTime";
         eventTime.innerText = event.time;
-        console.log(eventTime);
 
         const eventTitle = document.createElement("p");
         eventTitle.classList = "eventTitle";
@@ -117,7 +122,7 @@ function renderEvents(events) {
 
         const eventDate = document.createElement("p");
         eventDate.classList = "eventDate";
-        eventDate.innerText = event.date;
+        eventDate.innerText = event.date.slice(5, 10);
 
         const removeEventDiv = document.createElement("div");
         const removeEventX = document.createElement("i");
@@ -138,8 +143,6 @@ function renderEvents(events) {
         eventListDiv.appendChild(removeEventDiv);
         eventListDiv.appendChild(editEventDiv);
 
-        console.log(eventListDiv)
-
         const eventList = document.getElementById("eventList");
         eventList.appendChild(eventListDiv);
        
@@ -147,13 +150,11 @@ function renderEvents(events) {
 }
 
 async function thisWeeksEvent(date) {
-    console.log("thisWeeksEvent was called with: ", date);
 
     const response = await fetch(`/mainPage/${date}`, {
         method: "get"
     });
     const responseData = await response.json();
-    console.log("response", responseData)
 
     renderEvents(responseData.events)
 }
@@ -163,16 +164,12 @@ async function thisWeeksEvent(date) {
 
 async function editEvent(e) {
     const id = Number(e.target.dataset.id); 
-    console.log(e.target.parentElement.parentElement);
     const eventContainer = e.target.parentElement.parentElement;
 
     //const eventDate = document.getElementsByClassName("eventDate");
     const eventTime = eventContainer.children[0];
     const eventTitle = eventContainer.children[1];
     const eventDate = eventContainer.children[2];
-    console.log("eventDate", eventDate.innerText);
-
-    console.log(eventContainer.children[1])
 
     // if not editable make them editable
     //!eventDate.isContentEditable &&
@@ -226,6 +223,22 @@ openFormBtn.onclick = function () {
         document.getElementById("formPopUp").style.display = "none"
         document.getElementById("eventListContainer").style.display = "block";
         openFormBtn.children[0].classList.remove("rotated")
+    }
+
+}
+
+const menuBtn = document.getElementById("menuBtnLink");
+
+menuBtn.onclick = function () {
+
+    if (menuBtn.href = "/mainPage") {
+        console.log("menubtn")
+        menuBtn.children[0].classList.remove("fa-calendar");
+        menuBtn.children[0].classList.add("fa-angle-left");
+        menuBtn.href = "/";
+
+    } else {
+        menuBtn.href = "/mainPage";
     }
 
 }
