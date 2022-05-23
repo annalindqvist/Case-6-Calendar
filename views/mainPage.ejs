@@ -42,20 +42,10 @@
 
         <div id="eventListContainer">
             <div id="eventList">
-
-                <% events.forEach(function(event) { %>
-                <div class="eventListDiv">
-                    <p id="eventTime"><%= event.time %></p>
-                    <p id="eventTitle"><%= event.title %></p>
-                    <p id="eventDate"><%= event.date %></p>
-                    <div><i class="fa fa-times removeEvent" onclick="removeEvent(<%=event.id%>)"></i></div>
-                    <div><i class="fa fa-pencil editEvent" data-id="<%= event.id %>"></i></div>
-                </div>
-                <% }); %>
             </div>
         </div>
 
-        <div>
+        <div id="openFormContainer">
             <button id="openForm"><i class="fa fa-plus"></i></button>
         </div>
 
@@ -63,22 +53,24 @@
             <h2>Add to calendar</h2>
             <form action="/mainPage" autocomplete="off" method="post">
                 <div>
-                    <label for="date">Date</label>
-                    <input type="date" id="formDate" name="date" value="2022-05-16" min="2022-01-01" max="2022-12-31">
+                    <label for="date"><i class="fa fa-calendar"></i></label>
+                    <input type="date" id="formDate" name="date" value="" min="2022-01-01" max="2022-12-31" required>
                 </div>
                 <div>
+                    <!-- <label for="time"><i class="fa fa-clock"></i></label> -->
                     <label for="time">Time</label>
-                    <input type="text" name="time" id="time" rows="1" maxlength="15">
+                    <input type="text" name="time" id="time" rows="1" maxlength="15" required>
                 </div>
                 <div>
-                    <label for="title">Title</i></label>
-                    <textarea name="title" id="title" cols="30" rows="3" maxlength="100"></textarea>
+                    <label for="title"><i class="fa fa-comment"></i></label>
+                    <textarea name="title" id="title" cols="30" rows="3" maxlength="100" required></textarea>
                 </div>
-                <div>
-                    <button type="submit" id="submitBtn"><i class="fa fa-check"></i></button>
+                <div id="submitBtnContainer">
+                    <button type="submit" id="submitBtn">Save</button>
                 </div>
             </form>
         </div>
+        
 
     </main>
     <%- include ('partials/footer.ejs') %>

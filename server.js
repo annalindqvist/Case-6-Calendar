@@ -31,7 +31,8 @@ app.use(express.json());
 //     res.render('mainPage');
 // });
 
-app.get('/', eventController.getAllEvents);
+app.get('/', (req, res) => res.render('startPage'));
+//app.get('/', eventController.getAllEvents);
 app.get('/mainPage', eventController.getAllEvents);
 app.post('/mainPage', eventController.createEvent);
 

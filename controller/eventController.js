@@ -57,7 +57,7 @@ export default {
 
         
         //res.json( {message: "Event removed"});
-        res.redirect('/');
+        res.redirect('/mainPage');
     },
     updateEvent: (req, res) => {
         const id = Number(req.params.id);

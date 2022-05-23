@@ -5,6 +5,9 @@ const weekTag = document.getElementById("weekNumber");
 const monthDiv = document.getElementById("month");
 const previousWeek = document.getElementById("previousWeek");
 const nextWeek = document.getElementById("nextWeek");
+const formDate = document.getElementById("formDate");
+const openFormBtn = document.getElementById("openForm");
+const submitBtn = document.getElementById("submitBtn");
 
 let current = new Date();
 let pressToChangeWeek = 0;
@@ -12,6 +15,8 @@ let pressToChangeWeek = 0;
 let datesOnWeek = [];
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 let month = months[current.getMonth()];
+
+formDate.value = new Date().toString();
 
 function getWeekDays(chosenDate = new Date()) {
 
@@ -176,14 +181,16 @@ async function editEvent(e) {
         eventTime.contentEditable = true;
         eventTitle.contentEditable = true;
 
-        e.target.innerHTML = '<i class="fa fa-check"></i>';
+        e.target.classList.remove("fa-pencil");
+        e.target.classList.add("fa-check");
     } else {
         // Second time clicked it should save changes
 
         eventTime.contentEditable = false;
         eventTitle.contentEditable = false;
 
-        e.target.innerHTML = '<i class="fa fa-pencil"></i>';
+        e.target.classList.remove("fa-check");
+        e.target.classList.add("fa-pencil");
 
         const newEvent = {
             time: eventTime.innerText,
@@ -205,18 +212,20 @@ async function editEvent(e) {
     }
 }
 
-//document.querySelectorAll(".editEvent").forEach((btn) => (btn.onclick = editEvent));
 
 
-const openFormBtn = document.getElementById("openForm");
-const submitBtn = document.getElementById("submitBtn");
-
+document.getElementById("formPopUp").style.display = "none";
 openFormBtn.onclick = function () {
-    document.getElementById("formPopUp").style.display = "block";
-    document.getElementById("eventListContainer").style.display = "none";
-}
-submitBtn.onclick = function () {
-    document.getElementById("formPopUp").style.display = "none";
-    document.getElementById("eventListContainer").style.display = "block";
+
+    if (document.getElementById("formPopUp").style.display === "none") {
+        document.getElementById("formPopUp").style.display = "block";
+        document.getElementById("eventListContainer").style.display = "none";
+        openFormBtn.children[0].classList.add("rotated")
+
+    } else {
+        document.getElementById("formPopUp").style.display = "none"
+        document.getElementById("eventListContainer").style.display = "block";
+        openFormBtn.children[0].classList.remove("rotated")
+    }
 
 }
