@@ -8,6 +8,7 @@ const nextWeek = document.getElementById("nextWeek");
 const formDate = document.getElementById("formDate");
 const openFormBtn = document.getElementById("openForm");
 const submitBtn = document.getElementById("submitBtn");
+const menuBtn = document.getElementById("menuBtnLink");
 
 let current = new Date();
 let pressToChangeWeek = 0;
@@ -16,7 +17,8 @@ let datesOnWeek = [];
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 let month = months[current.getMonth()];
 
-formDate.value = new Date().toString();
+// Date in 
+formDate.value = new Date().toISOString().slice(0, 10);
 
 function getWeekDays(chosenDate = new Date()) {
 
@@ -89,7 +91,7 @@ async function removeEvent(id) {
     });
    
     if (response.redirected) {
-        window.location.href = response.url; // '/'
+        window.location.href = response.url; 
     }
 }
 
@@ -209,8 +211,6 @@ async function editEvent(e) {
     }
 }
 
-
-
 document.getElementById("formPopUp").style.display = "none";
 openFormBtn.onclick = function () {
 
@@ -227,18 +227,12 @@ openFormBtn.onclick = function () {
 
 }
 
-const menuBtn = document.getElementById("menuBtnLink");
-
 menuBtn.onclick = function () {
 
     if (menuBtn.href = "/mainPage") {
-        console.log("menubtn")
-        menuBtn.children[0].classList.remove("fa-calendar");
-        menuBtn.children[0].classList.add("fa-angle-left");
         menuBtn.href = "/";
 
     } else {
         menuBtn.href = "/mainPage";
     }
-
 }
