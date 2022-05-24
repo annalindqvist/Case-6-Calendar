@@ -13,7 +13,6 @@ export default {
         const date = req.params.date;
 
         if (!date) {
-            console.log("something went wrong");
             return;
         }
         
@@ -24,8 +23,6 @@ export default {
         const date = req.body.date;
         const time = req.body.time;
         const title = req.body.title;
-
-        console.log(date, time, title);
 
         const isOK = eventModel.addEvent(date, time, title);
 
@@ -39,7 +36,6 @@ export default {
     },
     removeEvent: (req, res) => {
         const id = Number(req.params.id);
-        console.log(id);
         if (id < 0) {
             console.log(eventViews.errorInvalidId);
             return;
@@ -49,14 +45,9 @@ export default {
         const isOK = eventModel.removeEvent(eventToBeRemoved.id);
 
         if (!isOK) {
-            console.log(eventViews.errorEventNotRemoved);
             return;
         }
 
-        console.log(eventViews.eventRemoved(eventToBeRemoved));
-
-        
-        //res.json( {message: "Event removed"});
         res.redirect('/mainPage');
     },
     updateEvent: (req, res) => {
@@ -66,24 +57,19 @@ export default {
         const title = req.body.title;
         
         if (id < 0) {
-            console.log(eventViews.errorInvalidId);
             return;
         }
 
         if (!time || !title) {
-            console.log("Date, time or title is not defined", date, time, title);
             return;
         }
 
         const isOK = eventModel.updateEvent(id, date, time, title);
-        console.log(date, time, title, id)
 
         if (!isOK) {
             console.log("Event not Updated");
             return;
         }
-
-        console.log("Event Updated");
 
         res.json( {message: "Event updated"});
         //res.redirect('/');

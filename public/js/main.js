@@ -1,4 +1,4 @@
-// DATE/DAYS/MONTH/WEEK
+// Variables
 
 const dateDiv = document.getElementById("date");
 const weekTag = document.getElementById("weekNumber");
@@ -12,14 +12,14 @@ const menuBtn = document.getElementById("menuBtnLink");
 
 let current = new Date();
 let pressToChangeWeek = 0;
-
 let datesOnWeek = [];
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 let month = months[current.getMonth()];
 
-// Date in 
-formDate.value = new Date().toISOString().slice(0, 10);
+// Todays date in date-input
+formDate.value = current.toISOString().slice(0, 10);
 
+// Prints correct weeks dates
 function getWeekDays(chosenDate = new Date()) {
 
     datesOnWeek = [];
@@ -39,13 +39,12 @@ function getWeekDays(chosenDate = new Date()) {
 
     thisWeeksEvent(chosenDate.toISOString());
 
-    return chosenDate;
 }
 
 getWeekDays();
 
+// Gets this weeks number
 function getWeek() {
-    // Kolla på denna sen, borde kanske bytas till någon bättre funktion för att få vecka
     Date.prototype.getWeek = function () {
         const onejan = new Date(this.getFullYear(), 0, 1);
         return Math.floor((((this - onejan) / 86400000) + onejan.getDay() + 1) / 7);
@@ -59,6 +58,7 @@ function getWeek() {
 
 getWeek();
 
+// Gets previous week/weeks dates and weeknumber
 previousWeek.onclick = function () {
 
     pressToChangeWeek = pressToChangeWeek - 7;
@@ -72,6 +72,7 @@ previousWeek.onclick = function () {
     getWeekDays(d);
 }
 
+// Gets next week/weeks dates and weeknumber
 nextWeek.onclick = function () {
 
     pressToChangeWeek = pressToChangeWeek + 7;
@@ -85,6 +86,7 @@ nextWeek.onclick = function () {
     getWeekDays(d);
 }
 
+// Remove event
 async function removeEvent(id) {
     const response = await fetch(`/mainPage/${id}`, {
         method: "delete"
@@ -95,6 +97,7 @@ async function removeEvent(id) {
     }
 }
 
+// Render correct weeks events and sort by date
 function renderEvents(events) {
 
     document.getElementById("eventList").innerHTML = "";
@@ -151,6 +154,7 @@ function renderEvents(events) {
     });
 }
 
+// Gets correct weeks events
 async function thisWeeksEvent(date) {
 
     const response = await fetch(`/mainPage/${date}`, {
@@ -161,29 +165,23 @@ async function thisWeeksEvent(date) {
     renderEvents(responseData.events)
 }
 
-//document.querySelectorAll(".editEvent").forEach((btn) => (btn.onclick = editEvent));
-//const editEvent = document.getElementsByClassName("editEvent");
-
+// Edit event funtion
 async function editEvent(e) {
+
     const id = Number(e.target.dataset.id); 
     const eventContainer = e.target.parentElement.parentElement;
-
-    //const eventDate = document.getElementsByClassName("eventDate");
     const eventTime = eventContainer.children[0];
     const eventTitle = eventContainer.children[1];
     const eventDate = eventContainer.children[2];
 
     // if not editable make them editable
-    //!eventDate.isContentEditable &&
     if (!eventTime.isContentEditable && !eventTitle.isContentEditable) {
-        //eventDate.contentEditable = true;
         eventTime.contentEditable = true;
         eventTitle.contentEditable = true;
 
         e.target.classList.remove("fa-pencil");
         e.target.classList.add("fa-check");
     } else {
-        // Second time clicked it should save changes
 
         eventTime.contentEditable = false;
         eventTitle.contentEditable = false;
@@ -204,13 +202,13 @@ async function editEvent(e) {
             },
         });
 
-        // Check if there is a redirect to follow the new url
         if (response.redirected) {
             window.location.href = response.url;
         }
     }
 }
 
+// Form popup onclick function
 document.getElementById("formPopUp").style.display = "none";
 openFormBtn.onclick = function () {
 
@@ -224,9 +222,9 @@ openFormBtn.onclick = function () {
         document.getElementById("eventListContainer").style.display = "block";
         openFormBtn.children[0].classList.remove("rotated")
     }
-
 }
 
+// Menu btn onclick function
 menuBtn.onclick = function () {
 
     if (menuBtn.href = "/mainPage") {

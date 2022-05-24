@@ -61,15 +61,11 @@ const eventModel = {
     removeEvent: function (id) {
         const allEvents = this.getEvents();
 
-        console.log("allevents", allEvents);
-
         if (!allEvents) {
           return false;
         }
 
         const filteredEvents = allEvents.filter((event) => event.id !== id);
-
-        console.log("filtered evnts", filteredEvents);
     
         this.saveEvents(filteredEvents);
     

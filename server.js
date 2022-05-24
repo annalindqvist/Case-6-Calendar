@@ -54,13 +54,13 @@ app.get('*', (req, res, next) => {
     res.render('404');
 });
 
-// server error 500...
+// server error 500
 // -------------------------
-// app.use((err, req, res, next) => {
+app.use((err, req, res, next) => {
 
-//     // show response
-//     return res.status(500).send("Server error, please return later");
-// });
+    // show response
+    return res.status(500).send("Server error, please return later");
+});
 
 // start server
 app.listen(port, () => {
