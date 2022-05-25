@@ -127,7 +127,7 @@ function renderEvents(events) {
 
         const eventDate = document.createElement("p");
         eventDate.classList = "eventDate";
-        eventDate.innerText = event.date.slice(5, 10);
+        eventDate.innerText = event.date;
 
         const removeEventDiv = document.createElement("div");
         const removeEventX = document.createElement("i");
