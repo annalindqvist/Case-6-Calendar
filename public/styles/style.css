@@ -165,10 +165,10 @@ main #eventList .eventListDiv .eventTitle {
 
 main #eventList .eventListDiv .eventDate{
     color: #FD97B7;
-    font-size: 14px;
+    font-size: 12px;
     font-weight:300;
     position: absolute;
-    left: -65px;
+    left: -95px;
     top: 20px;
 }
 

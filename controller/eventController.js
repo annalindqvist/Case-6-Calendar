@@ -71,8 +71,8 @@ export default {
             return;
         }
 
-        res.json( {message: "Event updated"});
-        //res.redirect('/');
+        //res.json( {message: "Event updated"});
+        res.redirect('/mainPage');
     }
 
 }
