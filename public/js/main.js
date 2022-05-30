@@ -105,7 +105,7 @@ function renderEvents(events) {
     const sortedEvents = events.sort( function (a, b) {
         
         const date1 = new Date(a.date);
-        const date2 = new Date(b.date)
+        const date2 = new Date(b.date);
 
         return date1 - date2;
     
