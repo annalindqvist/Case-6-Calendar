@@ -1,1 +1,111 @@
-[{"id":12,"date":"2022-06-18","time":"14:00","title":"Bröllop"},{"id":13,"date":"2022-06-24","time":"14:30","title":"Bröllop strängnäs"},{"id":14,"date":"2022-05-20","time":"13:00-18:00","title":"Jobb cubus"},{"id":31,"date":"2022-05-31","time":"13:00","title":"Redovisning av detta fantastiska case TJOHO ÄNTLIGEN ÖVER"},{"id":37,"date":"2022-06-10","time":"11:00","title":"Student Atle - Luleå!"},{"id":38,"date":"2022-06-09","time":"08:00","title":"Åka till Arlanda! Var i tid pga kö"},{"id":42,"date":"2022-06-01","time":"17:00","title":"Tåget går hem igen !!!"},{"id":43,"date":"2022-05-25","time":"12:00-19:00","title":"Jobb - 30% på allt."},{"id":44,"date":"2022-05-26","time":"10:00","title":"Dubbelkolla så kalendern fungerar."},{"id":46,"date":"2022-05-27","time":"13:00-18:00","title":"Jobb cubus - 30%!"},{"id":47,"date":"2022-05-27","time":"19:00","title":"Middag med tjejerna :D "},{"id":48,"date":"2022-05-29","time":"17:00","title":"Packa inför skåne efter jobbet"},{"id":50,"date":"2022-05-31","time":"17:00 ish","title":"After schoool hos Amända!!"},{"id":51,"date":"2022-05-23","time":"09.00-16:00","title":"Slutföra detta jävla case. !!!!!!!!!!"},{"id":52,"date":"2022-05-20","time":"19:00","title":"Middag med någon"},{"id":55,"date":"2022-06-06","time":"10:50","title":"inga lektioner - nationaldagen"},{"id":56,"date":"2022-06-13","time":"-","title":"ledig hela veckan från jobb"},{"id":57,"date":"2022-08-01","time":"14:30","title":"SPANIEN!"},{"id":58,"date":"2022-06-04","time":"11-17","title":"Jobb cubus"},{"id":59,"date":"2022-06-05","time":"12:00","title":"jobba igen"}]
+[{
+    "id": 12,
+    "date": "2022-06-18",
+    "time": "14:00",
+    "title": "Bröllop"
+}, {
+    "id": 13,
+    "date": "2022-06-24",
+    "time": "14:30",
+    "title": "Bröllop strängnäs"
+}, {
+    "id": 14,
+    "date": "2022-05-20",
+    "time": "13:00-18:00",
+    "title": "Jobb cubus"
+}, {
+    "id": 31,
+    "date": "2022-05-31",
+    "time": "13:00",
+    "title": "Redovisning av detta fantastiska case TJOHO ÄNTLIGEN ÖVER"
+}, {
+    "id": 37,
+    "date": "2022-06-10",
+    "time": "11:00",
+    "title": "Student Atle - Luleå!"
+}, {
+    "id": 38,
+    "date": "2022-06-09",
+    "time": "08:00",
+    "title": "Åka till Arlanda! Var i tid pga kö"
+}, {
+    "id": 42,
+    "date": "2022-06-01",
+    "time": "17:00",
+    "title": "Tåget går hem igen !!!"
+}, {
+    "id": 43,
+    "date": "2022-05-25",
+    "time": "12:00-19:00",
+    "title": "Jobb - 30% på allt."
+}, {
+    "id": 44,
+    "date": "2022-05-26",
+    "time": "10:00",
+    "title": "Dubbelkolla så kalendern fungerar."
+}, {
+    "id": 46,
+    "date": "2022-05-27",
+    "time": "13:00-18:00",
+    "title": "Jobb cubus - 30%!"
+}, {
+    "id": 47,
+    "date": "2022-05-27",
+    "time": "19:00",
+    "title": "Middag med tjejerna :D"
+}, {
+    "id": 48,
+    "date": "2022-05-29",
+    "time": "17:00",
+    "title": "Packa inför skåne efter jobbet"
+}, {
+    "id": 50,
+    "date": "2022-05-31",
+    "time": "17:00 ish",
+    "title": "After schoool hos Amända!!"
+}, {
+    "id": 51,
+    "date": "2022-05-23",
+    "time": "09.00-16:00",
+    "title": "Slutföra detta jävla case. !!!!!!!!!!"
+}, {
+    "id": 52,
+    "date": "2022-05-20",
+    "time": "19:00",
+    "title": "Middag med någon"
+}, {
+    "id": 55,
+    "date": "2022-06-06",
+    "time": "10:50",
+    "title": "inga lektioner - nationaldagen"
+}, {
+    "id": 56,
+    "date": "2022-06-13",
+    "time": "-",
+    "title": "ledig hela veckan från jobb"
+}, {
+    "id": 57,
+    "date": "2022-08-01",
+    "time": "14:30",
+    "title": "SPANIEN!"
+}, {
+    "id": 58,
+    "date": "2022-06-04",
+    "time": "11-17",
+    "title": "Jobb cubus"
+}, {
+    "id": 59,
+    "date": "2022-06-05",
+    "time": "12:00",
+    "title": "jobba igen"
+}, {
+    "id": 60,
+    "date": "2022-11-10",
+    "time": "1200",
+    "title": "städa huset"
+}, {
+    "id": 61,
+    "date": "2022-11-12",
+    "time": "1100",
+    "title": "jobb"
+}]
